@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: promenade
+  labels:
+    radanalytics.io/kind: SparkApplication
+data:
+  config: |-
+    image: quay.io/jkremser/openshift-spark:2.3-latest
+    mainApplicationFile: http://172.16.1.36/FastBCTest.jar
+    mainClass: unisannio.FastBC_2C2
+    arguments: "k8s://https://172.16.1.36:8443 bolt://neo4j-neo4j-core-0.promenade.svc:7687 neo4j password n w dist 5 0 . 0.1 100000"
+    #sleep: 300 # repeat each 5 minutes
+    driver:
+      cores: 1
+      coreLimit: 3000m
+      memory: 1g
+    executor:
+      instances: 1
+      cores: 1
+      coreLimit: 4000m
+      memory: 1g

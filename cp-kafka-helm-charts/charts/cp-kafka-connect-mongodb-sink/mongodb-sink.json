@@ -1,0 +1,9 @@
+{
+  "name": "mongodb-sink",
+  "config": {
+    "connection.uri":"mongodb://mongodb-replicaset-0.mongodb-replicaset-headless.promenade.svc.cluster.local:27017",
+    "topics.regex": "\\w+\\-Northbound",
+    "database": "test",
+    "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector"
+  }
+}

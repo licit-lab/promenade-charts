@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: sparky-cluster-1
+  labels:
+    radanalytics.io/kind: SparkCluster
+data:
+  config: |-
+    sparkConfigurationMap:
+    sparkConfiguration:
+    - name: spark.executor.memory
+      value: 1g
+    - name : spark.neo4j.bolt.url
+     value: bolt://neo4j-neo4j-core-0.prgr1.svc:7687
+    downloadData:
+    - url: https://raw.githubusercontent.com/radanalyticsio/spark-operator/master/README.md
+      to: /tmp/

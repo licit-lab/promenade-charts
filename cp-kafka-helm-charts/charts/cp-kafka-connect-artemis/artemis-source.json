@@ -1,0 +1,12 @@
+{
+  "name": "artemis-source",
+  "config": {
+     "connector.class":"it.unisannio.artemisourceconnector.ArtemisConnector",
+     "connection.url":"tcp://artemis-activemq-artemis-master.promenade.svc:61616",
+     "connection.user":"licit",
+     "connection.password":"licit",
+     "tasks.max":"20",
+     "mode": "bulk",
+     "topic.prefix":""
+  }
+}
