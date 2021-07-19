@@ -14,14 +14,14 @@ oc project promenade
 #helm install mongodb-replicaset .)
 
 #Creating artemis here
-(cd activemq-artemis/activemq-artemis || exit
-
-helm delete artemis
-
-oc delete pvc data-artemis-activemq-artemis-master-0
-oc delete pvc artemis-activemq-artemis
-
-helm install artemis .)
+#(cd activemq-artemis/activemq-artemis || exit
+#
+#helm delete artemis
+#
+#oc delete pvc data-artemis-activemq-artemis-master-0
+#oc delete pvc artemis-activemq-artemis
+#
+#helm install artemis .)
 
 #(cd neo4j || exit
 #helm delete neo4j
@@ -40,5 +40,5 @@ sleep 90
 (cd config || exit;
 echo -e "Creating Artemis Source Connector"
 curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json  http://connect-artemis-promenade.router.default.svc.cluster.local/connectors
-echo -e "Creating MongoDB Sink Connector"
-curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink.json  http://connect-mongo-promenade.router.default.svc.cluster.local/connectors)
+echo -e "Creating MongoDB Sink Connector")
+#curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink.json  http://connect-mongo-promenade.router.default.svc.cluster.local/connectors
