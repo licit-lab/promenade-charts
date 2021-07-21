@@ -27,6 +27,8 @@ spec:
         release: {{ .Release.Name | quote }}
         component: master
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: compute1
       securityContext:
         fsGroup: 200
       affinity:

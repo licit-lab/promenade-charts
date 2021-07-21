@@ -1,0 +1,15 @@
+apiVersion: radanalytics.io/v1
+kind: SparkCluster
+metadata:
+  name: my-spark-cluster
+spec:
+  worker:
+    instances: "1"
+    memory: "80Gi" #80g
+    cpu: 32      #32000m
+  master:
+    instances: "1"
+    memory: "1Gi"
+    cpu: 1
+  metrics: false    # on each pod expose the metrics endpoint on port 7777 for prometheus, defautls to false
+  sparkWebUI: true

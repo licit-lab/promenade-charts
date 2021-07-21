@@ -23,10 +23,14 @@ dependencies:
   version: 0.1.0
   repository: file://./charts/cp-kafka-connect-neo4j
   condition: cp-kafka-connect-neo4j.enabled
-- name: cp-kafka-connect-mongodb
+- name: connect-mongodb-sink-ingestion
   version: 0.1.0
-  repository: file://./charts/cp-kafka-connect-mongodb
-  condition: cp-kafka-connect-mongodb.enabled
+  repository: file://./charts/connect-mongodb-sink-ingestion
+  condition: connect-mongodb-sink-ingestion.enabled
+- name: connect-mongodb-sink-processing
+  version: 0.1.0
+  repository: file://./charts/connect-mongodb-sink-processing
+  condition: connect-mongodb-sink-processing.enabled
 - name: cp-ksql-server
   version: 0.1.0
   repository: file://./charts/cp-ksql-server

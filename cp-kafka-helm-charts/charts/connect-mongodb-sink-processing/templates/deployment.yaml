@@ -33,6 +33,8 @@ spec:
       {{- end }}
       {{- end }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: compute1
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
@@ -115,7 +117,7 @@ spec:
               echo \
               {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
               echo \
-              {{ .Files.Get "mongodb-sink.json" | toString | squote | indent 14}} >> /etc/mongodb-sink.json
+              {{ .Files.Get "mongodb-sink-ingestion.json" | toString | squote | indent 14}} >> /etc/mongodb-sink.json
               /etc/confluent/docker/run &
               $CUSTOM_SCRIPT_PATH
               sleep infinity

@@ -11,8 +11,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  host: >-
-    connect-mongo-promenade.router.default.svc.cluster.local
+  host: connect-mongo-sink-ingestion.router.default.svc.cluster.local
   port:
     targetPort: kafka-connect
   to:

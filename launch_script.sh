@@ -4,24 +4,24 @@ oc login master.licit.local:8443 --username=licit --password=licit
 
 oc project promenade
 
-#(cd mongodb || exit
-#
-#helm delete mongodb-replicaset
-#
-#oc delete pvc datadir-mongodb-replicaset-0
-#oc delete pvc datadir-mongodb-replicaset-1
-#
-#helm install mongodb-replicaset .)
+(cd mongodb || exit
+
+helm delete mongodb-replicaset
+
+oc delete pvc datadir-mongodb-replicaset-0
+oc delete pvc datadir-mongodb-replicaset-1
+
+helm install mongodb-replicaset .)
 
 #Creating artemis here
-#(cd activemq-artemis/activemq-artemis || exit
-#
-#helm delete artemis
-#
-#oc delete pvc data-artemis-activemq-artemis-master-0
-#oc delete pvc artemis-activemq-artemis
-#
-#helm install artemis .)
+(cd activemq-artemis/activemq-artemis || exit
+
+helm delete artemis
+
+oc delete pvc data-artemis-activemq-artemis-master-0
+oc delete pvc artemis-activemq-artemis
+
+helm install artemis .)
 
 #(cd neo4j || exit
 #helm delete neo4j
@@ -40,5 +40,9 @@ sleep 90
 (cd config || exit;
 echo -e "Creating Artemis Source Connector"
 curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json  http://connect-artemis-promenade.router.default.svc.cluster.local/connectors
-echo -e "Creating MongoDB Sink Connector")
-#curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink.json  http://connect-mongo-promenade.router.default.svc.cluster.local/connectors
+sleep 10
+echo -e "Creating MongoDB Sink Ingestion Connector"
+curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink-ingestion.json  http://connect-mongo-sink-ingestion.router.default.svc.cluster.local/connectors
+sleep 10
+echo -e "Creating MongoDB Sink Processing Connector"
+curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink-processing.json  http://connect-mongo-sink-processing.router.default.svc.cluster.local/connectors)

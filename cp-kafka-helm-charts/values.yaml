@@ -127,7 +127,7 @@ cp-kafka-connect-artemis:
   #   cpu: 100m
   #   memory: 128Mi
 
-cp-kafka-connect-mongodb:
+connect-mongodb-sink-ingestion:
   enabled: false
   image: confluentinc/cp-kafka-connect
   imageTag: 5.5.0
@@ -146,7 +146,7 @@ cp-kafka-connect-mongodb:
   #   cpu: 100m
   #   memory: 128Mi
 
-cp-kafka-connect-mongodb-sink:
+connect-mongodb-sink-processing:
   enabled: false
   image: confluentinc/cp-kafka-connect
   imageTag: 5.5.0
