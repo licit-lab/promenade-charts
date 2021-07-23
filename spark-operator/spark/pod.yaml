@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: spark-driver
+  labels:
+    app: spark-driver
+spec:
+  nodeSelector:
+    kubernetes.io/hostname: compute2
+  containers:
+    - image: adeiasiodq/spark_promenade_new:1
+      name: spark-driver
+      env:
+        - name: NEO4J_URL
+          value: "bolt://137.121.170.248:32002"
+        - name: NEO4J_USER
+          value: "neo4j"
+        - name: NEO4J_PASSWORD
+          value: "password"
+        - name: MONGODB_URL
+          value: "mongodb://137.121.170.248:30001/"
+        - name: MONGODB_DATABASE
+          value: "test"
+        - name: MONGODB_COLLECTION
+          value: "c_init"
+        - name: KAFKA_URL
+          value: "137.121.170.248:31090"
+        - name: T_WIN
+          value: "900"
+        - name: IS_DIRECTED
+          value: "d"
+        - name: IS_WEIGHTED
+          value: "w"
+        - name: IS_WEIGHT_DISTANCE
+          value: "dist"
+        - name: MAPPERS
+          value: "16"
+        - name: EPSILON
+          value: "0"
+        - name: OUTPUT_PREFIX
+          value: "/var/log/sparkoutputs"
+        - name: K
+          value: "0.01"
+        - name: KMEANS_ITERATIONS
+          value: "10000000"
+        - name: AREAS
+          value: "/usr/local/spark-2.4.5/areanames.txt"
+        - name: MASTER_URL
+          value: "spark://10.131.2.44:7077"
+        - name: DEPLOY_MODE
+          value: "client"
+        - name: CLASS
+          value: "unisannio.FastBC_2C_v1_par_areas"
+        - name: NAME
+          value: "FastBC2CTest"
+        - name: DRIVER_MEMORY
+          value: "10G"
+        - name: EXECUTOR_MEMORY
+          value: "40G"
+        - name: TOTAL_EXECUTOR_CORES
+          value: "16"
+        - name: EXECUTOR_CORES
+          value: "8"
+        - name: SPARK_DEFAULT_PARALLELISM
+          value: "16"
+        - name: SPARK_DRIVER_PORT
+          value: "7078"
+        - name: SPARK_BLOCKMANAGER_PORT
+          value: "7079"
+        - name: JAR
+          value: "/usr/local/spark-2.4.5/FastBCTest-0.0.1-SNAPSHOT-jar-with-dependencies.jar"
+      ports:
+        - containerPort: 7078
+          protocol: TCP
+        - containerPort: 7079
+          protocol: TCP
+      volumeMounts:
+        - mountPath: /var/log/sparkoutputs
+          name: logs
+  volumes:
+    - name: logs
+      persistentVolumeClaim:
+        claimName: spark-logs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+    name: spark-logs
+spec:
+ accessModes: [ "ReadWriteOnce" ]
+ resources:
+  requests:
+    storage: 10Gi

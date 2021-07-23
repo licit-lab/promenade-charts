@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    meta.helm.sh/release-name: mongodb
+    meta.helm.sh/release-namespace: challenge1
+  creationTimestamp: '2021-07-18T09:13:48Z'
+  labels:
+    app.kubernetes.io/component: mongodb
+    app.kubernetes.io/instance: mongodb
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: mongodb
+    helm.sh/chart: mongodb-10.7.0
+  name: mongodb-external
+  namespace: challenge1
+  resourceVersion: '128163171'
+  selfLink: /api/v1/namespaces/challenge2/services/mongodb-external
+  uid: 75ef6060-e7a8-11eb-a3ce-fa163e8d95db
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+    - name: mongodb
+      nodePort: 31181
+      port: 27017
+      protocol: TCP
+      targetPort: mongodb
+  publishNotReadyAddresses: true
+  selector:
+    app.kubernetes.io/component: mongodb
+    app.kubernetes.io/instance: mongodb
+    app.kubernetes.io/name: mongodb
+  sessionAffinity: None
+  type: NodePort
+status:
+  loadBalancer: {}

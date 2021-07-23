@@ -39,22 +39,24 @@ spec:
       {{- end }}
       {{- end }}
     spec:
-      affinity:
-        podAntiAffinity:
-          preferredDuringSchedulingIgnoredDuringExecution:
-          - weight: 1
-            podAffinityTerm:
-              labelSelector:
-                matchExpressions:
-                  - key: "app"
-                    operator: In
-                    values:
-                    - {{ template "cp-kafka.name" . }}
-                  - key: "release"
-                    operator: In
-                    values:
-                    - {{ .Release.Name }}
-              topologyKey: "kubernetes.io/hostname"
+      nodeSelector:
+        kubernetes.io/hostname: compute3
+{{/*      affinity:*/}}
+{{/*        podAntiAffinity:*/}}
+{{/*          preferredDuringSchedulingIgnoredDuringExecution:*/}}
+{{/*          - weight: 1*/}}
+{{/*            podAffinityTerm:*/}}
+{{/*              labelSelector:*/}}
+{{/*                matchExpressions:*/}}
+{{/*                  - key: "app"*/}}
+{{/*                    operator: In*/}}
+{{/*                    values:*/}}
+{{/*                    - {{ template "cp-kafka.name" . }}*/}}
+{{/*                  - key: "release"*/}}
+{{/*                    operator: In*/}}
+{{/*                    values:*/}}
+{{/*                    - {{ .Release.Name }}*/}}
+{{/*              topologyKey: "kubernetes.io/hostname"*/}}
       containers:
       {{- if .Values.prometheus.jmx.enabled }}
       - name: prometheus-jmx-exporter

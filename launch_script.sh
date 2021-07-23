@@ -4,24 +4,24 @@ oc login master.licit.local:8443 --username=licit --password=licit
 
 oc project promenade
 
-(cd mongodb || exit
-
-helm delete mongodb-replicaset
-
-oc delete pvc datadir-mongodb-replicaset-0
-oc delete pvc datadir-mongodb-replicaset-1
-
-helm install mongodb-replicaset .)
-
-#Creating artemis here
-(cd activemq-artemis/activemq-artemis || exit
-
-helm delete artemis
-
-oc delete pvc data-artemis-activemq-artemis-master-0
-oc delete pvc artemis-activemq-artemis
-
-helm install artemis .)
+#(cd mongodb || exit
+#
+#helm delete mongodb-replicaset
+#
+#oc delete pvc datadir-mongodb-replicaset-0
+#oc delete pvc datadir-mongodb-replicaset-1
+#
+#helm install mongodb-replicaset .)
+#
+##Creating artemis here
+#(cd activemq-artemis/activemq-artemis || exit
+#
+#helm delete artemis
+#
+#oc delete pvc data-artemis-activemq-artemis-master-0
+#oc delete pvc artemis-activemq-artemis
+#
+#helm install artemis .)
 
 #(cd neo4j || exit
 #helm delete neo4j

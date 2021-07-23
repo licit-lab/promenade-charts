@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kafka-client
-  namespace: default
+  namespace: promenade
 spec:
   containers:
   - name: kafka-client
@@ -11,3 +11,10 @@ spec:
       - sh
       - -c
       - "exec tail -f /dev/null"
+    volumeMounts:
+      - mountPath: /var/log/sparkoutputs
+        name: logs
+  volumes:
+    - name: logs
+      persistentVolumeClaim:
+        claimName: spark-logs

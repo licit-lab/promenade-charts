@@ -33,6 +33,8 @@ spec:
       {{- end }}
       {{- end }}
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: compute3
       containers:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
