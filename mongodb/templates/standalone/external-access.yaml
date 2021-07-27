@@ -3,7 +3,7 @@ kind: Service
 metadata:
   annotations:
     meta.helm.sh/release-name: mongodb
-    meta.helm.sh/release-namespace: challenge1
+    meta.helm.sh/release-namespace: promenade
   creationTimestamp: '2021-07-18T09:13:48Z'
   labels:
     app.kubernetes.io/component: mongodb
@@ -12,10 +12,7 @@ metadata:
     app.kubernetes.io/name: mongodb
     helm.sh/chart: mongodb-10.7.0
   name: mongodb-external
-  namespace: challenge1
-  resourceVersion: '128163171'
-  selfLink: /api/v1/namespaces/challenge2/services/mongodb-external
-  uid: 75ef6060-e7a8-11eb-a3ce-fa163e8d95db
+  namespace: promenade
 spec:
   externalTrafficPolicy: Cluster
   ports:

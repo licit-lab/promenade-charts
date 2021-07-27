@@ -1,8 +1,8 @@
 {
-  "name": "mongodb-sink",
+  "name": "mongodb-sink-ingestion-connector",
   "config": {
-    "connection.uri":"mongodb://mongodb-replicaset-0.mongodb-replicaset-headless.promenade.svc.cluster.local:27017",
-    "topics.regex": "\\w+\\-Northbound",
+    "connection.uri":"mongodb://mongodb.promenade.svc.cluster.local:27017",
+    "topics.regex": "[0-9a-zA-Z-_]+-Northbound",
     "writemodel.strategy": "com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneTimestampsStrategy",
     "database": "test",
     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector"

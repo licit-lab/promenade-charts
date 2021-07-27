@@ -6,9 +6,9 @@ metadata:
     app: spark-driver
 spec:
   nodeSelector:
-    kubernetes.io/hostname: compute2
+    kubernetes.io/hostname: compute4
   containers:
-    - image: adeiasiodq/spark_promenade_new:1
+    - image: lorenzo2489/spark_promenade_tests:v1.0.5
       name: spark-driver
       env:
         - name: NEO4J_URL
@@ -18,7 +18,7 @@ spec:
         - name: NEO4J_PASSWORD
           value: "password"
         - name: MONGODB_URL
-          value: "mongodb://137.121.170.248:30001/"
+          value: "mongodb://mongodb.promenade.svc.cluster.local:27017/"
         - name: MONGODB_DATABASE
           value: "test"
         - name: MONGODB_COLLECTION
@@ -46,7 +46,7 @@ spec:
         - name: AREAS
           value: "/usr/local/spark-2.4.5/areanames.txt"
         - name: MASTER_URL
-          value: "spark://10.131.2.44:7077"
+          value: "spark://10.130.2.57:7077"
         - name: DEPLOY_MODE
           value: "client"
         - name: CLASS
@@ -85,9 +85,9 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-    name: spark-logs
+  name: spark-logs
 spec:
- accessModes: [ "ReadWriteOnce" ]
- resources:
-  requests:
-    storage: 10Gi
+  accessModes: [ "ReadWriteOnce" ]
+  resources:
+    requests:
+      storage: 10Gi
