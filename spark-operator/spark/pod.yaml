@@ -18,7 +18,7 @@ spec:
         - name: NEO4J_PASSWORD
           value: "password"
         - name: MONGODB_URL
-          value: "mongodb://mongodb.promenade.svc.cluster.local:27017/"
+          value: "mongodb://mongodb1.promenade.svc.cluster.local:27017/"
         - name: MONGODB_DATABASE
           value: "test"
         - name: MONGODB_COLLECTION

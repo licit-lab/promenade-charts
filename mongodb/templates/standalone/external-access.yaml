@@ -2,30 +2,28 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-    meta.helm.sh/release-name: mongodb
+    meta.helm.sh/release-name: mongodb1
     meta.helm.sh/release-namespace: promenade
   creationTimestamp: '2021-07-18T09:13:48Z'
   labels:
-    app.kubernetes.io/component: mongodb
-    app.kubernetes.io/instance: mongodb
+    app.kubernetes.io/component: mongodb1
+    app.kubernetes.io/instance: mongodb1
     app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/name: mongodb1
     helm.sh/chart: mongodb-10.7.0
-  name: mongodb-external
+  name: mongodb1-external
   namespace: promenade
 spec:
   externalTrafficPolicy: Cluster
   ports:
     - name: mongodb
-      nodePort: 31181
+      nodePort: 31182
       port: 27017
       protocol: TCP
       targetPort: mongodb
   publishNotReadyAddresses: true
   selector:
-    app.kubernetes.io/component: mongodb
-    app.kubernetes.io/instance: mongodb
-    app.kubernetes.io/name: mongodb
+    app.kubernetes.io/component: mongodb1
   sessionAffinity: None
   type: NodePort
 status:

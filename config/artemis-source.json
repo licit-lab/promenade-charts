@@ -7,6 +7,8 @@
      "connection.password":"licit",
      "tasks.max":"20",
      "mode": "bulk",
-     "topic.prefix":""
+     "poll.interval.ms":"100",
+     "topic.prefix":"",
+     "batch.max.msgs":"1000"
   }
 }

@@ -5,9 +5,7 @@ oc login master.licit.local:8443 --username=licit --password=licit
 oc project promenade
 
 spark() {
-  (
-    cd spark-operator/spark || exit; oc apply -f pod.yaml
-  )
+  ( cd spark-operator/spark || exit; oc apply -f pod.yaml )
 }
 
 artemis() {
@@ -19,10 +17,8 @@ artemis() {
 }
 
 mongo() {
-  (cd mongodb || exit
-  helm delete mongodb
-  oc delete pvc mongodb
-  helm install mongodb .)
+  helm delete mongodb1; oc delete pvc mongodb1
+  (cd mongodb || exit; helm install mongodb1 .)
 }
 
 incorrect_selection() {
@@ -51,7 +47,7 @@ kafka(){
   (
     cd cp-kafka-helm-charts || exit; helm install kafka .
 
-    (cd charts/cp-kafka-connect-artemis || exit; sleep 100; helm install kafka-connect-artemis .)
+    (cd charts/cp-kafka-connect-artemis || exit; sleep 130; helm install kafka-connect-artemis .)
 
     (cd charts/connect-mongodb-sink-ingestion || exit; helm install connect-mongodb-sink-ingestion .)
 

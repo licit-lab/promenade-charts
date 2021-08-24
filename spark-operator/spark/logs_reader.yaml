@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"kafka-client","namespace":"promenade"},"spec":{"containers":[{"command":["sh","-c","exec
+      tail -f
+      /dev/null"],"image":"confluentinc/cp-kafka:5.5.0","name":"kafka-client","volumeMounts":[{"mountPath":"/var/log/sparkoutputs","name":"logs"}]}],"volumes":[{"name":"logs","persistentVolumeClaim":{"claimName":"spark-logs"}}]}}
+    openshift.io/scc: anyuid
+  name: logs-reader
+  namespace: promenade
+spec:
+  containers:
+    - command:
+        - sh
+        - '-c'
+        - exec tail -f /dev/null
+      image: 'confluentinc/cp-kafka:5.5.0'
+      imagePullPolicy: IfNotPresent
+      name: kafka-client
+      resources: {}
+      securityContext:
+        capabilities:
+          drop:
+            - MKNOD
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+        - mountPath: /var/log/sparkoutputs
+          name: logs
+        - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+          name: default-token-cnfm2
+          readOnly: true
+  dnsPolicy: ClusterFirst
+  imagePullSecrets:
+    - name: default-dockercfg-gksnn
+  nodeName: compute4
+  nodeSelector:
+    node-role.kubernetes.io/compute: 'true'
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext:
+    seLinuxOptions:
+      level: 's0:c17,c4'
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  volumes:
+    - name: logs
+      persistentVolumeClaim:
+        claimName: spark-logs
+    - name: default-token-cnfm2
+      secret:
+        defaultMode: 420
+        secretName: default-token-cnfm2

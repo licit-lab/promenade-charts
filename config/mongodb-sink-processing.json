@@ -1,10 +1,12 @@
 {
   "name": "mongodb-sink-processing-connector",
   "config": {
-    "connection.uri":"mongodb://mongodb.promenade.svc.cluster.local:27017",
+    "connection.uri":"mongodb://mongodb1.promenade.svc.cluster.local:27017",
     "topics.regex": "[0-9a-zA-Z-_]+-BC",
     "writemodel.strategy": "com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneTimestampsStrategy",
     "database": "test",
+    "tasks.max": "20",
+    "max.batch.size": "1000",
     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector"
   }
 }
