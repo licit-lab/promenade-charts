@@ -5,8 +5,8 @@
     "topics.regex": "[0-9a-zA-Z-_]+-Northbound",
     "writemodel.strategy": "com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneTimestampsStrategy",
     "database": "test",
-    "tasks.max": "20",
-    "max.batch.size": "1000",
+    "tasks.max": "10",
+    "max.batch.size": "0",
     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector"
   }
 }

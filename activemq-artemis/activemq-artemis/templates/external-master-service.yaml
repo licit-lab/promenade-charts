@@ -12,17 +12,17 @@ spec:
   externalTrafficPolicy: Cluster
   ports:
   - name: tcp
-    nodePort: 30340
+    nodePort: {{ .Values.external.tcp }}
     port: 61616
     protocol: TCP
     targetPort: 61616
   - name: http
-    nodePort: 30341
+    nodePort: {{ .Values.external.http }}
     port: 8161
     protocol: TCP
     targetPort: 8161
   - name: mqtt
-    nodePort: 30342
+    nodePort: {{ .Values.external.mqtt }}
     port: 1883
     protocol: TCP
     targetPort: 1883

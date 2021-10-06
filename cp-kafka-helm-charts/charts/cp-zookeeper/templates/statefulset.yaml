@@ -40,7 +40,7 @@ spec:
       {{- end }}
     spec:
       nodeSelector:
-        kubernetes.io/hostname: compute3
+        kubernetes.io/hostname: compute5
 {{/*      affinity:*/}}
 {{/*        podAntiAffinity:*/}}
 {{/*          preferredDuringSchedulingIgnoredDuringExecution:*/}}

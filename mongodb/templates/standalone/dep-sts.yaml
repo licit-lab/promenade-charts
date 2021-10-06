@@ -44,7 +44,7 @@ spec:
       {{- end }}
     spec:
       nodeSelector:
-        kubernetes.io/hostname: compute2
+        kubernetes.io/hostname: compute1
       {{- include "mongodb.imagePullSecrets" . | nindent 6 }}
       {{- if .Values.schedulerName }}
       schedulerName: "{{ .Values.schedulerName }}"

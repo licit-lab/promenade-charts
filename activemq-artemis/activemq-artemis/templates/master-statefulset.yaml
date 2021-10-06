@@ -28,7 +28,7 @@ spec:
         component: master
     spec:
       nodeSelector:
-        kubernetes.io/hostname: compute1
+        kubernetes.io/hostname: compute2
       securityContext:
         fsGroup: 200
       affinity:

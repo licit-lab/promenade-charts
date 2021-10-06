@@ -5,10 +5,10 @@
      "connection.url":"tcp://artemis-activemq-artemis-master.promenade.svc:61616",
      "connection.user":"licit",
      "connection.password":"licit",
-     "tasks.max":"20",
+     "tasks.max":"10",
      "mode": "bulk",
-     "poll.interval.ms":"100",
+     "poll.interval.ms":"1000",
      "topic.prefix":"",
-     "batch.max.msgs":"1000"
+     "batch.max.msgs":"1300"
   }
 }

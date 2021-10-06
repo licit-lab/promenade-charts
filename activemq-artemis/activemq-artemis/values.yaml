@@ -76,3 +76,7 @@ resources:
 loadbalancer:
   enabled: false
 
+external:
+  tcp: 30340
+  http: 30341
+  mqtt: 30342

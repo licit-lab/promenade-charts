@@ -34,7 +34,7 @@ spec:
       {{- end }}
     spec:
       nodeSelector:
-        kubernetes.io/hostname: compute1
+        kubernetes.io/hostname: compute4
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
@@ -80,6 +80,8 @@ spec:
               value: {{ .Values.kafka.bootstrapServers }}
             - name: CONNECT_GROUP_ID
               value: {{ template "cp-kafka-connect.groupId" . }}
+            - name: CONNECT_CLIENT_ID
+              value: "connect1"
             - name: CONNECT_CONFIG_STORAGE_TOPIC
               value: {{ template "cp-kafka-connect.fullname" . }}-config
             - name: CONNECT_OFFSET_STORAGE_TOPIC
@@ -111,7 +113,7 @@ spec:
             - |
               cd /usr/share/confluent-hub-components && mkdir artemis-connector
               cd artemis-connector && mkdir etc && mkdir lib && cd lib
-              wget http://172.16.1.36/ArtemisSource.jar
+              wget http://172.16.1.64/ArtemisSource.jar
               echo \
               {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
               echo \

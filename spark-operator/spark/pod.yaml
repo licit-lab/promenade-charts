@@ -8,7 +8,7 @@ spec:
   nodeSelector:
     kubernetes.io/hostname: compute4
   containers:
-    - image: lorenzo2489/spark_promenade_tests:v1.0.6
+    - image: lorenzo2489/spark_promenade_tests:v1.1.0
       name: spark-driver
       env:
         - name: NEO4J_URL
@@ -17,6 +17,10 @@ spec:
           value: "neo4j"
         - name: NEO4J_PASSWORD
           value: "password"
+        - name: TIME_WINDOW_SEC
+          value: "900"
+        - name: INTERNAL_TIME_WINDOW_SEC
+          value: "180"
         - name: MONGODB_URL
           value: "mongodb://mongodb1.promenade.svc.cluster.local:27017/"
         - name: MONGODB_DATABASE
@@ -46,7 +50,7 @@ spec:
         - name: AREAS
           value: "/usr/local/spark-2.4.5/areanames.txt"
         - name: MASTER_URL
-          value: "spark://10.129.2.186:7077"
+          value: "spark://10.129.2.205:7077"
         - name: DEPLOY_MODE
           value: "client"
         - name: CLASS
