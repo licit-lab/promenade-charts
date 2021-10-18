@@ -10,6 +10,9 @@
 ## Override the namespace for resource deployed by the chart, but can itself be overridden by the local namespaceOverride
 #   namespaceOverride: my-global-namespace
 
+external:
+  port: 31182
+
 image:
   ## Bitnami MongoDB(R) registry
   ##
@@ -327,8 +330,8 @@ podAnnotations: {}
 ##
 podSecurityContext:
   enabled: true
-  fsGroup: 1000310000
-  #1000310000
+  fsGroup: 1000210000
+  #1000210000
   ## sysctl settings
   ## Example:
   ## sysctls:
@@ -342,8 +345,8 @@ podSecurityContext:
 ##
 containerSecurityContext:
   enabled: true
-  runAsUser: 1000310000
-  #1000310000
+  runAsUser: 1000210000
+  #1000210000
   runAsNonRoot: true
 
 ## MongoDB(R) containers' resource requests and limits.
@@ -737,7 +740,7 @@ arbiter:
   ##
   podSecurityContext:
     enabled: true
-    fsGroup: 1000310000
+    fsGroup: 1000210000
     ## sysctl settings
     ## Example:
     ## sysctls:
@@ -751,7 +754,7 @@ arbiter:
   ##
   containerSecurityContext:
     enabled: true
-    runAsUser: 1000310000
+    runAsUser: 1000210000
 
   ## MongoDB(R) Arbiter containers' resource requests and limits.
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/

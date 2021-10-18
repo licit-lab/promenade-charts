@@ -2,46 +2,48 @@
 
 for i in {0..0}
 do
-  echo "Iteration $i"
-  ./menu.sh
+  printf 'Iteration %s' "$i"
+  ./create_components.sh
 
+  printf "Statically creating Kafka topics and Mongo collections\n"
   (
     cd /c/Users/anton/Desktop/Promenade/static-configurator || exit
     mvn exec:java -Dexec.mainClass="configuration.StaticCreation"
   )
 
+  printf "Create connectors\n"
   (
       cd config || exit;
-      echo -e "Creating Artemis Source Connector"
+      printf "Creating Artemis Source Connector\n"
       curl -s -X POST -H 'Content-Type: application/json' --data @artemis-source.json  http://connect-artemis-promenade.router.default.svc.cluster.local/connectors
-      echo -e "Creating MongoDB Sink Ingestion Connector"
+      printf "\nCreating MongoDB1 Sink Ingestion Connector\n"
       curl -s -X POST -H 'Content-Type: application/json' --data @mongodb1-sink-ingestion.json  http://connect-mongo1-sink-ingestion.router.default.svc.cluster.local/connectors
-      #sleep 10
+      #printf "\nCreating MongoDB2 Sink Ingestion Connector\n"
       #curl -s -X POST -H 'Content-Type: application/json' --data @mongodb2-sink-ingestion.json  http://connect-mongo2-sink-ingestion.router.default.svc.cluster.local/connectors
   )
 
-  echo "Now waiting before launching the emulator"
+  printf "Now waiting 20 seconds before launching the emulator\n"
 
   sleep 20
 
   ssh -i ~/.ssh/script69 furno@137.121.170.69 'bash -s' < launch_emulator.sh
-  echo "Now waiting 6 minutes"
-  sleep 360
+  printf "Now waiting 300 seconds\n"
+  sleep 300
 
   ssh -i ~/.ssh/script69 furno@137.121.170.69 'bash -s' < stop_emulator.sh
-  echo "Now stopping the emulator"
+  pritnf "Now stopping the emulator and waiting 30 seconds\n"
 
   sleep 30
 
   ./test_custom_sharded_mongo.sh
 
+  printf "Collecting results from kafka\n"
+  (
+    cd /c/Users/anton/Desktop/kafka-exercise || exit
+    mvn exec:java -Dexec.mainClass="unisannio.dist.kafka.ParallelConsumers" -Dexec.args="0 mongo"
+  )
+
 #  echo "Collecting results"
 #  ssh -i ~/.ssh/script69 furno@137.121.170.69 'bash -s' < get_results.sh
 
-#  (
-#    cd /c/Users/anton/Desktop/kafka-exercise || exit
-#    mvn exec:java -Dexec.mainClass="unisannio.dist.kafka.ConsumerMain" -Dexec.args="$i artemis"
-#  )
-
-#  sleep 30
 done

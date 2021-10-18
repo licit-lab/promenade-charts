@@ -34,7 +34,7 @@ spec:
       {{- end }}
     spec:
       nodeSelector:
-        kubernetes.io/hostname: compute4
+        kubernetes.io/hostname: compute1
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
@@ -113,7 +113,7 @@ spec:
               {{ .Files.Get "filelist.txt" | toString | squote | indent 14}} >> /etc/filelist.txt
               cd /usr/share/confluent-hub-components && mkdir mongodb-connector
               cd mongodb-connector && mkdir etc && mkdir lib && cd lib
-              wget http://172.16.1.64/mongo-kafka-1.5.0-all.jar
+              wget http://172.16.1.64/mongo-kafka-1.7.0-all.jar
               echo \
               {{ .Files.Get "kafka-connect.properties" | toString | squote | indent 14}} >> /etc/connect-distributed.properties
               echo \
