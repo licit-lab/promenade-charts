@@ -27,15 +27,13 @@ do
   sleep 20
 
   ssh -i ~/.ssh/script69 furno@137.121.170.69 'bash -s' < launch_emulator.sh
-  printf "Now waiting 300 seconds\n"
-  sleep 300
+  printf "Now waiting 240 seconds\n"
+  sleep 240
 
   ssh -i ~/.ssh/script69 furno@137.121.170.69 'bash -s' < stop_emulator.sh
-  pritnf "Now stopping the emulator and waiting 30 seconds\n"
+  printf "Now stopping the emulator and waiting 30 seconds\n"
 
   sleep 30
-
-  ./test_custom_sharded_mongo.sh
 
   printf "Collecting results from kafka\n"
   (
