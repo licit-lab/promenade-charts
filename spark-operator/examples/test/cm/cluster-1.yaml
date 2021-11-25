@@ -7,7 +7,7 @@ metadata:
 data:
   # this should fail
   config: |-
-    w0rker:
+    worker:
       instances: "1"
     master:
       instances: "1"

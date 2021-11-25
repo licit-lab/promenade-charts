@@ -19,8 +19,8 @@ spec:
         app: {{ template "neo4j.name" . }}
         component: core
     spec:
-#      nodeSelector:
-#        kubernetes.io/hostname: compute3
+      nodeSelector:
+        kubernetes.io/hostname: compute3
       containers:
         - name: {{ template "neo4j.fullname" . }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"

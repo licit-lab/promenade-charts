@@ -11,7 +11,7 @@
 #   namespaceOverride: my-global-namespace
 
 external:
-  port: 31182
+  port: 31184
 
 image:
   ## Bitnami MongoDB(R) registry

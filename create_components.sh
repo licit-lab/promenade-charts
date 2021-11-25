@@ -45,7 +45,7 @@ kafka(){
   helm delete kafka-connect-artemis
   helm delete connect-mongodb-sink-ingestion
   helm delete connect-mongodb-sink-processing
-  helm delete connect-mongo1-sink-ingestion connect-mongo2-sink-ingestion;
+  helm delete connect-mongo1-sink-ingestion connect-mongo2-sink-ingestion connect-mongo1-sink-processing;
   sleep 10;
   oc delete pvc datadir-kafka-cp-zookeeper-2 
   oc delete pvc datadir-kafka-cp-zookeeper-1 
@@ -69,6 +69,10 @@ kafka(){
       helm install connect-mongo1-sink-ingestion --set route.name="connect-mongo1-sink-ingestion" .;
       #helm install connect-mongo2-sink-ingestion --set route.name="connect-mongo2-sink-ingestion" .;
     )
+#    (
+#      cd charts/connect-mongodb-sink-processing || exit;
+#      helm install connect-mongo1-sink-processing --set route.name="connect-mongo1-sink-processing" .;
+#    )
   )
 
   sleep 120

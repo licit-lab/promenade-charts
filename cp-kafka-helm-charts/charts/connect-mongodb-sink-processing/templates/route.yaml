@@ -11,7 +11,7 @@ metadata:
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
-  host: connect-mongo-sink-processing.router.default.svc.cluster.local
+  host: {{ .Values.route.name }}.router.default.svc.cluster.local
   port:
     targetPort: kafka-connect
   to:

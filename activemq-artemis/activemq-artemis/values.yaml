@@ -77,6 +77,6 @@ loadbalancer:
   enabled: false
 
 external:
-  tcp: 30350
-  http: 30351
-  mqtt: 30352
+  tcp: 30340
+  http: 30341
+  mqtt: 30342

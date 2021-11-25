@@ -6,7 +6,7 @@
      "connection.user":"licit",
      "connection.password":"licit",
      "queue.poll.interval.ms":"10000",
-     "tasks.max":"1",
+     "tasks.max":"2",
      "mode": "bulk",
      "poll.interval.ms":"1000",
      "topic.prefix":"",

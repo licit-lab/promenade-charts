@@ -3,10 +3,9 @@
   "config": {
     "connection.uri":"mongodb://mongodb1.promenade.svc:27017",
     "topics.regex": "[0-9a-zA-Z-_]+-Northbound",
-    "collection": "single",
     "writemodel.strategy": "com.mongodb.kafka.connect.sink.writemodel.strategy.UpdateOneTimestampsStrategy",
     "database": "test",
-    "tasks.max": "2",
+    "tasks.max": "1",
     "max.batch.size": "0",
     "connector.class":"com.mongodb.kafka.connect.MongoSinkConnector"
   }

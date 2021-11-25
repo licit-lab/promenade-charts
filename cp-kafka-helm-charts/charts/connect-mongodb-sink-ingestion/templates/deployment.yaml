@@ -34,7 +34,7 @@ spec:
       {{- end }}
     spec:
       nodeSelector:
-        kubernetes.io/hostname: compute1
+        kubernetes.io/hostname: compute4
       containers:
         {{- if .Values.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
