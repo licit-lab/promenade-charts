@@ -1,0 +1,77 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "promenade-ws-server"
+  namespace: promenade  
+spec:
+  runPolicy: "Serial" 
+  triggers: 
+    - type: "GitHub"
+      github:
+        secretReference:
+          name: "promenade-ws-server-secret"
+  source:
+    git:
+      ref: master
+      uri: 'https://github.com/licit-lab/promenade-ws-server'
+    sourceSecret:
+      name: github
+    type: Git
+  strategy:
+    type: "Docker"
+  output: 
+    to:
+      kind: "ImageStreamTag"
+      name: "promenade-ws-server:latest"
+#  postCommit: 
+#      script: "bundle exec rake test"
+
+---
+
+- kind: Secret
+  apiVersion: v1
+  metadata:
+    name: "promenade-ws-server-secret"
+  data:
+    WebHookSecretKey: f5SepgQ7lwVplSLr
+    
+---
+
+apiVersion: v1
+kind: ImageStream
+metadata:
+  labels: 
+    application: promenade-ws-server
+  name: promenade-ws-server 
+  namespace: promenade
+  
+---
+
+kind: "DeploymentConfig"
+apiVersion: "v1"
+metadata:
+  name: "promenade-ws-server"
+spec:
+  template: 
+    metadata:
+      labels:
+        name: "promenade-ws-server"
+    spec:
+      containers:
+        - name: "promenade-ws-server-container"
+          image: "promenade/promenade-ws-server"
+          ports:
+            - containerPort: 8025
+              protocol: "TCP"
+  replicas: 1 
+  triggers:
+    - type: "ImageChange" 
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - "promenade-ws-server-container"
+        from:
+          kind: "ImageStreamTag"
+          name: "promenade-ws-server:latest"
+  strategy: 
+    type: "Rolling"

@@ -1,0 +1,21 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ template "cp-kafka-connect.fullname" . }}
+  namespace: promenade
+  annotations:
+    openshift.io/host.generated: 'true'
+  labels:
+    app: {{ template "cp-kafka-connect.name" . }}
+    chart: {{ template "cp-kafka-connect.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+spec:
+  host: {{ .Values.route.name }}.router.default.svc.cluster.local
+  port:
+    targetPort: kafka-connect
+  to:
+    kind: Service
+    name: {{ template "cp-kafka-connect.fullname" . }}
+    weight: 100
+  wildcardPolicy: None

@@ -36,6 +36,9 @@ install_kafka_connectors(){
 
   (cd cp-kafka-helm-charts/charts/connect-mongodb-sink-processing || exit;
   helm install connect-mongo-sink-processing .)
+
+  (cd connect-websocket-sink || exit;
+  helm install connect-websocket-sink .)
 }
 
 configure_kafka_connectors(){
@@ -49,7 +52,11 @@ configure_kafka_connectors(){
 
   printf "\nConfiguring MongoDB Sink Processing Connector, after 20 seconds...\n"
   sleep 20
-  curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink-processing.json http://connect-mongo-sink-processing.router.default.svc.cluster.local/connectors)
+  curl -s -X POST -H 'Content-Type: application/json' --data @mongodb-sink-processing.json http://connect-mongo-sink-processing.router.default.svc.cluster.local/connectors
+
+  printf "\nConfiguring Websocket Sink Ingestion Connector, after 20 seconds...\n"
+  sleep 20
+  curl -s -X POST -H 'Content-Type: application/json' --data @ws-sink.json http://connect-websocket-sink.router.default.svc.cluster.local/connector)
 }
 
 printf "\nInstalling Artemis...\n"

@@ -1,0 +1,9 @@
+{
+  "name": "ws-sink-connector",
+  "config": {
+    "connection.uri": "ws://ws-server-service.promenade.svc:8025/ws/messages/in",
+    "topics.regex": "[0-9a-zA-Z-_]+-Northbound",
+    "tasks.max": "1",
+    "connector.class": "it.unisannio.connector.WSSinkConnector"
+  }
+}

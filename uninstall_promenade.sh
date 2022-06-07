@@ -51,6 +51,7 @@ uninstall_kafka_connectors(){
   helm uninstall kafka-connect-artemis
   helm uninstall connect-mongo-sink-ingestion
   helm uninstall connect-mongo-sink-processing
+  helm uninstall connect-websocket-sink
 }
 
 uninstall_artemis;
